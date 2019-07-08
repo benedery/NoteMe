@@ -18,7 +18,7 @@ const SignUp = () => {
         <div>
             <div className="container">
                 <form onSubmit={handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign In</h5>
+                    <h5 className="grey-text text-darken-3">Sign Up</h5>
                     <div className="input-field">
                         <label htmlFor="email">E-Mail</label>
                         <input type="email" id="email" onChange={e => setEmail(e.target.value)} />

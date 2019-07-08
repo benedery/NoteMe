@@ -1,32 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { createProject } from '../../store/actions/projectActions'
 
-const CreateProject = () => {
+const CreateProject = ({ createProject }) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(title)
-        console.log(content)
+        createProject({ title, content })
     }
 
     return (
         <div>
             <div className="container">
                 <form onSubmit={handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign In</h5>
+                    <h5 className="grey-text text-darken-3">Create New Note</h5>
                     <div className="input-field">
                         <label htmlFor="title">Title</label>
                         <input type="text" id="title" onChange={e => setTitle(e.target.value)} />
                     </div>
                     <div className="input-field">
                         <label htmlFor="content">Content</label>
-                        <input type="password" id="content" onChange={e => setTitle(e.target.value)} />
+                        <textarea onChange={e => setContent(e.target.value)} id="content" className="materialize-textarea"></textarea>
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">
-                            Login
-                    </button>
+                            Create
+                            </button>
                     </div>
                 </form>
             </div>
@@ -34,4 +35,10 @@ const CreateProject = () => {
     )
 }
 
-export default CreateProject
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createProject: (project) => dispatch(createProject(project))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject)
