@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import { signIn } from '../../store/actions/authActions';
+import { connect } from 'react-redux'
 
-const SignIn = () => {
+const SignIn = ({ signIn, authError }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email)
-        console.log(password)
+        signIn({ email, password })
     }
 
     return (
@@ -28,10 +29,25 @@ const SignIn = () => {
                             Login
                     </button>
                     </div>
+                    <div className="red-text center">
+                        {authError ? <p>{authError}</p> : null}
+                    </div>
                 </form>
             </div>
         </div>
     )
 }
 
-export default SignIn
+const mapStateToProps = (state) => {
+    return {
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signIn: (creds) => dispatch(signIn(creds))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
