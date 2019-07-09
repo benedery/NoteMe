@@ -10,7 +10,7 @@ const Dashboard = ({ projects }) => {
         <div className="dashboard container">
             <div className="row">
                 <div className="col s12 m6">
-                    <ProjectList projects={projects} />
+                    <ProjectList projects={projects} key={1} />
                 </div>
                 <div className="col s12 m5 offset-m1">
                     <Notifactions />
@@ -27,5 +27,4 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(connect(mapStateToProps, null),
-    firestoreConnect([{ collection: 'projects' }]))
-    (Dashboard)
+    firestoreConnect([{ collection: 'projects' }]))(Dashboard);
