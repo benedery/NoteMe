@@ -13,12 +13,12 @@ const ProjectDetails = (props) => {
         return (
             <div>
                 <div className="container section project-details">
-                    <div className="card z-depth-0">
-                        <div className="card-content">
+                    <div className="card z-depth-0 sign-form projectDetails">
+                        <div className="card-content ">
                             <span className="card-title"> {project.title} </span>
                             <p> {project.content}</p>
                         </div>
-                        <div className="card-action grey lighten-4 grey-text">
+                        <div id="projectDetails" className="card-action grey lighten-4 grey-text sign-form">
                             <div>Posted By {project.authorFirstName} {project.authorLastName}</div>
                             <div>Published at</div>
                         </div>

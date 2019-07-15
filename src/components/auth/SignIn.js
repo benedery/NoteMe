@@ -15,7 +15,7 @@ const SignIn = ({ signIn, authError, auth }) => {
     return (
         <div>
             <div className="container">
-                <form onSubmit={handleSubmit} className="white">
+                <form onSubmit={handleSubmit} className="white sign-form">
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
                         <label htmlFor="email">E-Mail</label>

@@ -16,7 +16,7 @@ const CreateProject = ({ createProject, auth }) => {
 
         <div>
             <div className="container">
-                <form onSubmit={handleSubmit} className="white">
+                <form onSubmit={handleSubmit} className="white sign-form">
                     <h5 className="grey-text text-darken-3">Create New Note</h5>
                     <div className="input-field">
                         <label htmlFor="title">Title</label>

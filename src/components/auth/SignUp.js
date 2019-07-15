@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { signUp } from '../../store/actions/authActions';
 
-const SignUp = ({ auth }) => {
+const SignUp = ({ auth, signUp, authError }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -10,17 +11,19 @@ const SignUp = ({ auth }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email)
-        console.log(password)
-        console.log(firstName)
-        console.log(lastName)
+        signUp({
+            email,
+            password,
+            firstName,
+            lastName
+        })
     }
     if (auth.uid) return <Redirect to="/" />
 
     return (
         <div>
             <div className="container">
-                <form onSubmit={handleSubmit} className="white">
+                <form onSubmit={handleSubmit} className="white sign-form">
                     <h5 className="grey-text text-darken-3">Sign Up</h5>
                     <div className="input-field">
                         <label htmlFor="email">E-Mail</label>
@@ -42,6 +45,9 @@ const SignUp = ({ auth }) => {
                         <button className="btn pink lighten-1 z-depth-0">
                             Sign Up
                     </button>
+                        <div className="red-text center">
+                            {authError ? <p>{authError}</p> : null}
+                        </div>
                     </div>
                 </form>
             </div>
@@ -51,7 +57,14 @@ const SignUp = ({ auth }) => {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        authError: state.auth.authError
     }
 }
-export default connect(mapStateToProps, null)(SignUp)
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: (newUser) => dispatch(signUp(newUser))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
